@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApplication3</title>
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication3.styles.css" asp-append-version="true" />*@
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <style>
+        li:has(> a.active) { 
+            background-color: #d90000;
+            color: #fff;
+            /* styles to apply to the li tag */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="d-flex">
+        <div id="side1" class="w-auto position-fixed">
+            @Html.Partial("_Sidebar")
+        </div>
+        <div id="side2" class="invisible">
+            @Html.Partial("_Sidebar")
+        </div>
+        <div class="col overflow-auto">
+            @Html.Partial("_Navbar")
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        var mytoggleid = 1;
+        function Toggle() {
+            if (mytoggleid) {
+                mytoggleid = 0;
+                var side1 = document.querySelector("#side1");
+                side1.classList.remove("w-auto");
+                side1.classList.replace("position-fixed", "d-none");
+                var side2 = document.querySelector("#side2");
+                side2.classList.replace("invisible", "d-none");
+            }
+            else {
+                mytoggleid = 1;
+                var side1 = document.querySelector("#side1");
+                side1.classList.add("w-auto");
+                side1.classList.replace("d-none", "position-fixed");
+                var side2 = document.querySelector("#side2");
+                side2.classList.replace("d-none", "invisible");
+            }
+        }
+
+        jQuery(function ($) {
+            var path = window.location.href;
+            // because the 'href' property of the DOM element is the absolute path
+            $('ul li a').each(function () {
+                if (this.href === path) {
+                    $(this).addClass('active');
+                }
+            });
+        });
+
+    </script>
+
+</body>
+</html>
